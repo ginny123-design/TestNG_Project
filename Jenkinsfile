@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        // Option A: Uses JDK installed on Jenkins agent (named 'JDK17' under Global Tool Configuration)
-        // jdk 'JDK17'
-    }
-
     environment {
         HEADLESS = 'true'
     }
@@ -35,9 +30,6 @@ pipeline {
         always {
             // Archive Extent Reports & Screenshots as downloadable Jenkins build artifacts
             archiveArtifacts artifacts: 'test-output/*.html, test-output/screenshots/*.png', allowEmptyArchive: true
-
-            // Publish TestNG XML Results in Jenkins UI (requires TestNG Plugin)
-            // testng testResultsPattern: 'target/surefire-reports/testng-results.xml'
         }
         success {
             echo '=== TestNG Data-Driven Test Suite Executed Successfully ==='
